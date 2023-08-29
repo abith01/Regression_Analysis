@@ -16,7 +16,7 @@ Checking assumptions is crucial! I calculated residuals, assessed multicollinear
 🧪 Studying Residuals and Normality:
 I delved into residual analysis to validate model assumptions. The Shapiro-Wilk test for normality and a set of diagnostic plots provided insights into the residuals' distribution and goodness-of-fit. #ResidualAnalysis
 
-🚀 Sharing this journey of data exploration, model building, and diagnostics to showcase the iterative process of refining models and ensuring their reliability. Have any questions or thoughts? Let's discuss in the comments below! 💬
+
 
 
 

@@ -1,0 +1,114 @@
+---
+title: "Regression Analysis"
+author: "Abith Raj"
+date: "2023-08-29"
+output: html_document
+---
+
+```{r}
+# Regression Analysis
+mtcars  # This is the inbuilt dataset 
+```
+
+```{r}
+dim(mtcars) # Checking dimension 
+```
+32 rows, 11 columns
+```{r}
+head(mtcars) # Displays only 5 rows in the dataset
+```
+
+```{r}
+crls=cor(mtcars)  # Checking correrlation
+crls
+```
+
+```{r}
+round(crls,2) # Making it has 2 decimal numbers
+```
+
+```{r}
+attach(mtcars)
+mlr=lm(mpg~.,data=mtcars) # Performing multilinear regression
+mlr
+```
+
+```{r}
+summary(mlr) # Summary of the Mlr
+```
+
+```{r}
+anova(mlr) # ANOVA test 
+```
+Checking the significance. Only disp, wt, cyl has the most significance 
+```{r} 
+new_mlr=lm(mpg~cyl+disp+wt,data=mtcars)   # Now only performing the Significant variables in mlr
+new_mlr
+```
+
+```{r}
+summary(new_mlr)
+
+```
+Again here their is no significance in the disp 
+```{r}
+new1_mlr=lm(mpg~cyl+wt,data=mtcars)   # Here droping the disp variable
+new1_mlr
+```
+
+```{r}
+summary(new1_mlr)
+```
+Now all variaables are significant
+
+```{r}
+#Assumptions
+e=residuals(new1_mlr)
+e
+```
+
+```{r}
+sum(e)
+```
+
+```{r}
+round(sum(e),5)
+```
+The sum of error terms is 0.
+```{r}
+#Multicollinearity
+library(lmtest)
+library(car)
+vif(new1_mlr)
+```
+
+```{r}
+#durbin watson test for auto correlation
+dwtest(new1_mlr)
+
+```
+
+```{r}
+# bp test for checking homoscedasticity  (variance of the diagonals is equal or not  )
+bptest(new1_mlr)
+
+```
+
+```{r}
+#Stocastic Test
+library(Matrix)
+a=data.frame(cyl,wt)
+rankMatrix(as.matrix(a))
+
+```
+
+```{r}
+# Cheking for normality of residuals
+shapiro.test(e)
+```
+```{r}
+par(mfrow=c(2,2))
+plot(new1_mlr)
+
+```
+
